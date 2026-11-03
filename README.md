@@ -1,12 +1,18 @@
 # Licitaciones
 
-Alerta de oportunidades de contratación del Estado colombiano (SECOP II): baja los
-datasets abiertos de SECOP, puntúa cada proceso **en el navegador** y muestra los
-que mejor encajan con el perfil de la empresa.
+Alerta de oportunidades de contratación del Estado colombiano (SECOP II y SECOP I):
+baja los datasets abiertos de SECOP, puntúa cada proceso de 0 a 100 **en el
+navegador** y muestra los que mejor encajan con el perfil de la empresa.
 
 Todo ocurre en la página: no hay servidor, ni base de datos, ni modelo. Los datos
-viven en el IndexedDB del navegador y la puntuación es TF-IDF con coseno en JS
-puro. Parado, el proyecto no gasta CPU, RAM ni VRAM.
+viven en el IndexedDB del navegador y la puntuación es un score compuesto (TF-IDF
+con coseno, UNSPSC, presupuesto, palabras clave y plazo) en TypeScript. Parado,
+el proyecto no gasta CPU, RAM ni VRAM.
+
+Además del listado puntuado: filtros con inclusión/exclusión de palabras y
+búsquedas guardadas, resumen de requisitos de cada pliego, un tablero Kanban de
+seguimiento, alertas para lo que pase de 80 puntos y exportación a CSV, Excel y
+PDF. Ver [Funcionalidades](#funcionalidades).
 
 ## Arranque rápido
 
@@ -62,8 +68,36 @@ haya hecho en el tuyo. Para llevar los datos de uno a otro está el NDJSON de
 4. **Respaldo.** Exportar / Importar. Los datos son de esta máquina, así que hay
    una salida en NDJSON y una entrada para volver a cargarlos en otro equipo.
 
-Nada se ejecuta sin que se pulse el botón. No hay cron, ni polling de Socrata, ni
-tareas programadas.
+Por defecto nada se ejecuta sin que se pulse el botón. La única excepción es
+opt-in: en **Datos** se puede activar la sincronización periódica (cada N
+minutos, incremental), que solo corre mientras la pestaña esté abierta.
+
+## Funcionalidades
+
+| Qué | Dónde | Cómo funciona |
+| --- | --- | --- |
+| **Score 0-100 con semáforo** | Cada tarjeta | Alto ≥ 70, Medio 40-69, Bajo < 40. La tarjeta enseña el desglose por componente (ver [Puntuación](#puntuación)). |
+| **SECOP I** | Descarga | Procesos *convocados* de `f789-7hwg`, mapeados al mismo registro y marcados `fuente: SECOP I`. Se activa/desactiva y se acota en **Datos**. |
+| **Sincronización periódica** | **Datos** | Opt-in. Cada N minutos (mínimo 5) baja en modo incremental mientras la pestaña está abierta. No duplica: el `put` es por id. |
+| **Filtros avanzados** | Panel de filtros | Texto libre, *Incluir* (cualquiera de) y *Excluir* (ninguna de) palabras, cuantía mínima/máxima, departamento, municipio, entidad, estado, modalidad, fuente y score mínimo, combinables y en vivo. |
+| **Buscador** | Barra encima de la lista | Busca en lo descargado: objeto, entidad, número de proceso (`CO1.REQ…`, `CO1.NTC…`, constancia de SECOP I), referencia, municipio, modalidad o UNSPSC. `"Comillas"` = frase exacta. |
+| **Buscar en SECOP** | Botón junto al buscador | Pregunta a datos.gov.co **sin límite de fechas** (texto completo `$q` en objeto y descripción, o el número de proceso exacto), guarda y puntúa lo encontrado y lo enseña. Hasta 100 resultados por fuente, los más recientes. El `CO1.NTC…` no se puede buscar así: va dentro de una URL que el portal no indexa. |
+| **Búsquedas guardadas** | Panel de filtros | Se guardan con nombre (el mismo nombre sobrescribe) en este navegador. |
+| **Resumir pliego** | Botón en cada tarjeta → pestaña *Requisitos* | Requisitos jurídicos, financieros y técnicos: frases citadas del texto publicado + lo que la ley pide para la modalidad (marcado *habitual*). Sin red ni LLM. |
+| **Tablero (CRM)** | Pestaña *Tablero* | Kanban de 5 columnas: En evaluación, En preparación, Oferta presentada, Ganada, Descartada. Arrastrar o selector; nota por tarjeta. Viaja en el respaldo NDJSON. |
+| **Alertas** | Botón *Alertas* | Avisa una vez por proceso cuando una descarga trae uno con score **superior a 80** (umbral editable). Notificación del sistema opcional. |
+| **Exportar resultados** | *Descargar resultados: CSV · Excel · PDF* | Todo lo que pasa los filtros, en el orden de la lista. CSV con `;` y BOM (Excel es-CO), XLSX real, PDF A4 apaisado. |
+
+Límites honestos:
+
+- **El resumidor no lee el PDF del pliego.** Los documentos están en
+  `community.secop.gov.co` / `contratos.gov.co`, que no dejan descargarlos desde
+  otra página (CORS), y `datos.gov.co` solo publica metadatos. El resumen lo dice
+  y enlaza al proceso.
+- **"Por usuario" es "por navegador".** No hay cuentas: búsquedas, tablero y
+  alertas viven en el IndexedDB de quien las crea.
+- **SECOP I no publica fecha de cierre**: en esos procesos el componente de plazo
+  queda sin datos y su peso se reparte entre los demás.
 
 ### Configuración de la descarga
 
@@ -96,21 +130,23 @@ la aplicación ante Socrata.
 
 | Dataset | ID | Qué trae |
 | --- | --- | --- |
-| Procesos | `p6dx-8zbt` | Licitaciones publicadas |
-| Contratos | `jbjy-vk9h` | Contratos firmados |
+| Procesos SECOP II | `p6dx-8zbt` | Licitaciones publicadas |
+| Contratos SECOP II | `jbjy-vk9h` | Contratos firmados |
+| Procesos SECOP I | `f789-7hwg` | Procesos de compra pública; se bajan solo los `Convocado` |
 
 Se leen directo de `datos.gov.co` desde la página (`Access-Control-Allow-Origin:
 *`). Las claves **no** se cruzan por su id: en procesos es `CO1.REQ.*` y en
 contratos `CO1.PCCNTR.*`. Lo único que comparten es el `noticeUID` (`CO1.NTC.*`)
 de la URL `OpportunityDetail`, y por eso se enlazan (`noticeUid()` en
-`src/lib/socrata.js`).
+`src/lib/socrata.ts`).
 
 La descarga por defecto está acotada a **5.000 procesos y 2.000 contratos**; la
 ventana completa se activa en el panel **Datos** y conviene tener `appToken`.
 
-El almacén son seis stores IndexedDB (`src/lib/db.js`): `procesos` (con
-descripción), `ligeros` (sin texto, para el índice de consulta), `matches`,
-`contratos`, `acciones` y `meta`. Si el navegador no deja abrir IndexedDB —abrir el
+El almacén son siete stores IndexedDB (`src/lib/db.ts`, versión 3): `procesos`
+(con descripción), `ligeros` (sin texto, para el índice de consulta), `matches`,
+`contratos`, `acciones`, `crm` (el tablero) y `meta` (perfil, alertas, búsquedas
+guardadas, historial). Si el navegador no deja abrir IndexedDB —abrir el
 HTML con doble clic lo bloquea, y el incógnito también— cae a un almacén en
 memoria y aparece un **banner ámbar** que lo dice: se puede usar, pero no se
 guarda, y los datos se pierden al recargar. Para tener guardado de verdad,
@@ -118,14 +154,31 @@ guarda, y los datos se pierden al recargar. Para tener guardado de verdad,
 
 ## Puntuación
 
-Sin modelo y sin GPU. El orden de las operaciones es el importante (`src/lib/score.js`):
+Sin modelo y sin GPU (`src/lib/score.ts`). El score es una media ponderada de
+cinco componentes, cada uno de 0 a 100:
 
-1. similitud TF-IDF + coseno entre el perfil y el texto de la ficha;
-2. componente de reglas: cobertura de las palabras clave del perfil;
-3. mezcla de los dos con el peso de la configuración;
-4. topes por exclusión y por presupuesto, **al final**.
+| Componente | Peso por defecto | Cómo se calcula |
+| --- | --- | --- |
+| Objeto | 30 | Similitud TF-IDF + coseno entre el perfil y el objeto/descripción |
+| UNSPSC | 25 | 100 si el código del proceso cae dentro de un código del perfil; si no, 80/60/30 por misma clase/familia/segmento |
+| Presupuesto | 20 | 100 dentro del rango del perfil; fuera, la proporción con el límite rebasado |
+| Palabras clave | 15 | Coincidencias literales; satura en 4 |
+| Plazo | 10 | Días hasta el cierre: cerrado 0, ≤2 días 25, ≤5 días 60, 6-45 días 100, más 80 |
 
-El paso 4 va al final a propósito. Un tope aplicado antes de mezclar se reescala
+Los pesos se editan en **Perfil** y se normalizan. Un componente sin datos
+(perfil sin UNSPSC, proceso sin precio o sin fecha de cierre) **no cuenta como
+0**: su peso se reparte entre los demás. Los códigos UNSPSC del perfil van en
+**Perfil** (por defecto 4323 software, 8111 servicios informáticos y 8116
+entrega de servicios de TI).
+
+El orden de las operaciones es el importante:
+
+1. los cinco componentes;
+2. la mezcla ponderada;
+3. penalizaciones de modalidad (-15) y territorio (-10), y topes por exclusión
+   (5) y por presupuesto (20), **al final**.
+
+El paso 3 va al final a propósito. Un tope aplicado antes de mezclar se reescala
 hacia arriba al multiplicar por el peso semántico, y un proceso excluido con
 similitud 100 salía con 8 en vez de 5. Ver `ESTADO-PROYECTO.md` §5.7.
 
@@ -181,7 +234,8 @@ Dos avisos que ya costaron tiempo:
 
 ## Requisitos
 
-Para el panel: **Node 18+**. Nada más.
+Para el panel: **Node 18+**. Nada más (TypeScript, ESLint y las librerías de
+exportación se instalan con `npm ci`).
 
 Para `-ConBackend`: Python 3.11+ y PostgreSQL embebido en `.pgdata\` (el binario se
 descarga solo la primera vez con `backend\scripts\pg_manager.py init`).
@@ -193,22 +247,32 @@ frontend/
   index.html
   src/
     lib/
-      api.js         fachada: la superficie que consume la UI, resuelta en local
-      socrata.js     cliente SODA (fetch con reintentos + respaldo por JSONP)
-      mapper.js      filas de Socrata -> registros del panel
-      db.js          IndexedDB y su fallback en memoria
-      indice.js      filtros, facetas, orden y paginación en memoria
-      score.js       TF-IDF, coseno y las reglas del perfil
-      ingesta.js     descarga, progreso, cancelación y enlazado de contratos
-      snapshot.js    exportar / importar NDJSON
-      ocds.js        releases OCDS 1.1 de tender y contrato
-      perfil.js      perfil de empresa
-      config.js      configuración editable desde el panel
+      tipos.ts       interfaces de dominio (procesos, filtros, scoring, CRM...)
+      api.ts         fachada: la superficie que consume la UI, resuelta en local
+      socrata.ts     cliente SODA (fetch con reintentos + respaldo por JSONP)
+      mapper.ts      filas de Socrata (SECOP II y SECOP I) -> registros del panel
+      db.ts          IndexedDB y su fallback en memoria
+      indice.ts      filtros, facetas, orden y paginación en memoria
+      score.ts       score compuesto: TF-IDF, UNSPSC, presupuesto, palabras, plazo
+      ingesta.ts     descarga, progreso, cancelación, enlazado y alertas
+      autosync.ts    sincronización periódica opt-in
+      alertas.ts     alertas de score alto y notificaciones
+      resumidor.ts   requisitos jurídicos, financieros y técnicos del pliego
+      exportar.ts    CSV, XLSX y PDF de la lista filtrada
+      snapshot.ts    exportar / importar NDJSON (respaldo)
+      ocds.ts        releases OCDS 1.1 de tender y contrato
+      perfil.ts      perfil de empresa
+      config.ts      configuración editable desde el panel
     components/      React
-      PanelDatos.jsx   token, días y topes de la descarga
+      PanelDatos.tsx   token, días, topes, SECOP I y sincronización periódica
+      Tablero.tsx      CRM Kanban
+      PanelAlertas.tsx campana y ajustes de alertas
+      ResumenPliego.tsx pestaña de requisitos
   src/test/          vitest (lógica y componentes)
   e2e/               Playwright: humo con datos falsos + carga real opt-in
-  playwright.config.js
+  playwright.config.ts
+  tsconfig.json      TypeScript estricto (strict, noImplicitAny, noUnusedLocals...)
+  eslint.config.js   typescript-eslint + react-hooks; `no-explicit-any` es error
 backend/             stack legado, opcional (ver arriba)
 .run/                PIDs y logs que crea start.ps1
 ```
@@ -224,8 +288,11 @@ backend/             stack legado, opcional (ver arriba)
 
 # Tests
 cd frontend
-npm test         # 74 unitarios (vitest): lógica, panel y descarga
-npm run test:e2e # 5 de humo (Playwright): la pagina en un navegador de verdad
+npm run typecheck # tsc --noEmit, TypeScript estricto
+npm run lint      # ESLint (typescript-eslint, react-hooks)
+npm test          # 98 unitarios (vitest): lógica, panel, descarga y funciones nuevas
+npm run test:e2e  # 5 de humo (Playwright): la pagina en un navegador de verdad
+npm run build     # typecheck + build de producción
 ```
 
 Los dos verdes. El unitario no necesita nada; el de humo levanta el build con
@@ -242,7 +309,7 @@ la ventana de 7 días) y solo se lanza a mano:
 
 ```powershell
 $env:SECOP_REAL = '1'
-npx playwright test e2e/secop-real.spec.js
+npx playwright test e2e/secop-real.spec.ts
 ```
 
 La **carga completa** no es una suite: se midió a mano el 29/10 con el preset
@@ -336,7 +403,7 @@ ambigüedad (epoch, `Date`) se resuelve en UTC.
 
 **El texto de Socrata no respeta los anchos de columna.** Hay entidades que meten
 el objeto entero del contrato en `referencia_del_contrato`. `recortar()` en
-`mapper.js` los corta al ancho de la columna antes de guardar.
+`mapper.ts` los corta al ancho de la columna antes de guardar.
 
 **Los ids de proceso se repiten.** El dataset publica el mismo `id_del_proceso`
 varias veces (144.341 filas eran 118.817 ids distintos), así que `deduplicar()`

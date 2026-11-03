@@ -1,5 +1,74 @@
 # Plataforma de Licitaciones SECOP II — Estado del Proyecto
 
+> ## 9ª pasada (03/11): TypeScript estricto, SECOP I, score compuesto y las funciones de alto valor
+>
+> ### 1. Qué se hizo
+>
+> - **Migración entera a TypeScript estricto.** `src/lib`, componentes, tests y
+>   e2e pasan de `.js/.jsx` a `.ts/.tsx` con `strict`, `noImplicitAny`,
+>   `noUnusedLocals` y `noImplicitReturns`. Las interfaces de dominio
+>   (`Proceso`, `Match`, `FiltrosIndice`, `FiltrosUI`, `TarjetaCRM`, `Alerta`,
+>   `ResumenPliego`...) viven en `src/lib/tipos.ts`. ESLint 9 con
+>   typescript-eslint y react-hooks; `@typescript-eslint/no-explicit-any` es
+>   error y no hay ningún `any` en el código.
+> - **SECOP I** (`f789-7hwg`): procesos `Convocado` de la ventana, mapeados al
+>   mismo registro de proceso (`mapearProcesoSecopI`) con `fuente: 'SECOP I'`,
+>   tope propio (`maxProcesosSecopI`, 2.000) y casilla en **Datos**. No publica
+>   fecha de cierre.
+> - **Sincronización periódica opt-in** (`autosync.ts`): cada N minutos
+>   (mínimo 5), incremental, solo con la pestaña abierta. Apagada por defecto:
+>   se respeta la decisión de no tener cron que corra solo.
+> - **Score compuesto 0-100** (`score.ts`): objeto (TF-IDF) 30, UNSPSC 25,
+>   presupuesto 20, palabras clave 15, plazo 10. Un componente sin datos reparte
+>   su peso. Los topes de exclusión (5) y presupuesto (20) siguen **al final**
+>   (bug #14). Semáforo Alto ≥ 70 / Medio 40-69 / Bajo < 40 en tarjeta, detalle,
+>   estadísticas y tablero. Perfil con `codigos_unspsc` y pesos editables.
+> - **Filtros**: incluir (cualquiera de) / excluir (ninguna de) palabras, cuantía
+>   mínima, municipio, estado del proceso, fuente, orden; **búsquedas guardadas**
+>   por nombre en `meta:busquedas_guardadas`.
+> - **Resumir pliego** (`resumidor.ts`): requisitos jurídicos, financieros y
+>   técnicos citados del texto publicado + los habituales de la modalidad
+>   (Ley 80/1150, Decreto 1082). No lee el PDF (CORS) y lo dice.
+> - **Tablero Kanban** (`Tablero.tsx`, store `crm`, IndexedDB v3): En evaluación,
+>   En preparación, Oferta presentada, Ganada, Descartada. Arrastrar o selector,
+>   nota por tarjeta, va en el respaldo NDJSON.
+> - **Alertas** (`alertas.ts`): una por proceso cuando una descarga trae score
+>   > 80 (umbral editable), campana en la cabecera y notificación opcional.
+> - **Exportar resultados** (`exportar.ts`): CSV (`;` + BOM), XLSX escrito con
+>   `fflate` y PDF con `jspdf` + `jspdf-autotable` cargados bajo demanda.
+>
+> ### 2. Bugs que destapó la migración
+>
+> | Bug | Arreglo |
+> |---|---|
+> | `api.recalcular` usaba `profilActual` (variable inexistente): `ReferenceError` en cuanto se llamaba | Lo detectó `tsc`; ahora usa `perfil()` |
+> | `ligeros` no guardaba `url_proceso`: el botón "SECOP ↗" de las tarjetas no salía nunca en la lista | Se añade al registro ligero (aparece tras la siguiente descarga) |
+> | "Solo guardadas" sin nada guardado enseñaba **toda** la lista (el filtro se saltaba con el mapa de acciones vacío) | Devuelve vacío; test nuevo |
+> | `alLote` de `puntuarCorpus` no esperaba a `guardarMatches` (promesa suelta) | Se espera |
+> | `.perfil-form input` usaba `var(--fondo)`, que no existe | `var(--bg)` |
+> | En escritorio (> 900 px) el botón "Mostrar filtros" estaba oculto por CSS y el panel arrancaba cerrado: **los filtros no se podían abrir** | Botón siempre visible |
+> | Las facetas se calculaban solo al abrir la página: tras la primera descarga el panel de filtros no ofrecía departamentos ni entidades hasta recargar | Se recalculan cuando cambian las estadísticas |
+>
+> ### 3. Verificación de esta pasada
+>
+> | Comprobación | Resultado |
+> |---|---|
+> | `npm run typecheck` (`tsc --noEmit`) | **0 errores** |
+> | `npm run lint` | **0 problemas** |
+> | `npm test` | **98/98** (74 anteriores, adaptados, + 24 nuevos) |
+> | `npm run test:e2e` | **5/5** de humo + 1 skipped (el real opt-in) |
+> | Build de producción | OK — 281,8 kB JS (90,6 kB gzip); jsPDF va en chunks diferidos |
+> | Carga real (`SECOP_REAL=1`, 120 SECOP II + 60 SECOP I + 60 contratos) | **1/1** — 6 peticiones, 0×4xx/5xx, 0 errores, 180 procesos puntuados, faceta Fuente con las dos fuentes |
+>
+> ### 4. Lo que sigue
+>
+> - Los scores guardados antes de esta pasada no tienen desglose: **Perfil →
+>   Repuntuar todo** los recalcula con el motor nuevo (la ficha lo avisa).
+> - Revisar los pesos por defecto con datos reales de la empresa.
+> - El `appToken` sigue siendo el único paso externo.
+>
+> ---
+
 > ## 8ª pasada (29/10): la carga completa real, medida — y el score que no se pintaba
 >
 > ### 1. Qué se hizo

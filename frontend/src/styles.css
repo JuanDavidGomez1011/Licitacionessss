@@ -69,8 +69,11 @@ a { color: var(--acento); }
 
 /* --- layout --- */
 .layout { display: flex; gap: 20px; align-items: flex-start; }
+/* Visible siempre: el panel arranca cerrado, y con el boton oculto en escritorio
+   (como estaba) los filtros no se podian abrir en pantallas de mas de 900 px. */
+.layout { flex-wrap: wrap; }
 .toggle-filtros {
-  display: none; margin-bottom: 12px; width: 100%;
+  display: block; margin-bottom: 4px; flex: 0 0 100%;
   background: var(--panel-2); border: 1px solid var(--linea);
   border-radius: var(--radio); padding: 9px; cursor: pointer;
 }
@@ -288,7 +291,7 @@ a { color: var(--acento); }
 .perfil-form label { display: flex; flex-direction: column; gap: 4px; }
 .perfil-form label > span { font-size: 12px; color: var(--tenue); }
 .perfil-form input, .perfil-form textarea {
-  font: inherit; color: var(--texto); background: var(--fondo);
+  font: inherit; color: var(--texto); background: var(--bg);
   border: 1px solid var(--linea); border-radius: var(--radio); padding: 8px;
 }
 .perfil-form small { font-size: 11px; color: var(--tenue); }
@@ -300,7 +303,7 @@ a { color: var(--acento); }
 /* --- Ajustes de descarga ------------------------------------------------- */
 .config-presets { display: flex; gap: 8px; flex-wrap: wrap; }
 .config-presets .btn { font-size: 12px; }
-.config-check { flex-direction: row !important; align-items: center; gap: 8px !important; }
+.config-check { flex-direction: row !important; flex-wrap: wrap; align-items: center; gap: 8px !important; }
 .config-check input { width: 16px; height: 16px; padding: 0; accent-color: var(--acento); }
 .config-check span { font-size: 13px; color: var(--texto); }
 .config-aviso {
@@ -337,10 +340,183 @@ a { color: var(--acento); }
   .punto-sync { animation: none; opacity: 1; }
 }
 
+/* --- Semaforo y desglose del score ---------------------------------------- */
+.semaforo {
+  display: inline-block; margin-top: 5px; padding: 1px 6px; border-radius: 999px;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
+  border: 1px solid var(--linea); color: var(--tenue);
+}
+.semaforo-alta { color: var(--alta); border-color: #1e5c3c; background: #12291d; }
+.semaforo-media { color: var(--media); border-color: #6b5a1a; background: #2b2412; }
+.semaforo-baja { color: var(--baja); border-color: #6b2b2b; background: #2a1616; }
+
+.desglose {
+  list-style: none; margin: 12px 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px 14px;
+}
+.desglose li { display: grid; grid-template-columns: 92px 1fr 28px; align-items: center; gap: 6px; font-size: 11px; }
+.desglose-nombre { color: var(--tenue); }
+.desglose-barra { height: 6px; border-radius: 3px; background: var(--panel-2); overflow: hidden; }
+.desglose-fill { display: block; height: 100%; background: var(--tenue); }
+.desglose-fill.score-alta { background: var(--alta); }
+.desglose-fill.score-media { background: var(--media); }
+.desglose-fill.score-baja { background: var(--baja); }
+.desglose-valor { text-align: right; color: var(--tenue); font-variant-numeric: tabular-nums; }
+
+.tag.crm { color: #cfe0ff; border-color: var(--acento); background: #1c2b48; }
+
+/* --- Vistas (lista / tablero) ---------------------------------------------- */
+.vistas { display: flex; gap: 4px; margin: 4px 0 16px; border-bottom: 1px solid var(--linea); }
+.vistas button {
+  background: none; border: none; border-bottom: 2px solid transparent;
+  padding: 8px 14px; cursor: pointer; color: var(--tenue); font-weight: 600;
+}
+.vistas button.activa { color: var(--texto); border-bottom-color: var(--acento); }
+
+/* --- Herramientas de la lista: orden y exportacion ------------------------ */
+.resultados-head { flex-wrap: wrap; gap: 10px; }
+.resultados-herramientas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.orden { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tenue); }
+.orden select, .crm-select select, .kanban-card select {
+  background: var(--bg); border: 1px solid var(--linea); border-radius: 7px; padding: 4px 6px; font-size: 12px;
+}
+.exportar { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--tenue); }
+.btn.mini { padding: 3px 8px; font-size: 12px; }
+.aviso-linea { margin: 0 0 10px; }
+.linkish {
+  background: none; border: none; padding: 0; cursor: pointer; text-align: left;
+  color: var(--texto); font-weight: 600;
+}
+.linkish:hover { color: var(--acento); text-decoration: underline; }
+
+/* --- Buscador ---------------------------------------------------------------- */
+.buscador { flex: 0 0 100%; display: flex; flex-wrap: wrap; gap: 8px; }
+.buscador input {
+  flex: 1 1 260px; min-width: 0; padding: 11px 14px; font-size: 15px;
+  background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio);
+}
+.buscador input:focus { outline: none; border-color: var(--acento); }
+.buscador-estado { flex: 0 0 100%; margin: 0; }
+.banner.remoto { background: #16233a; border: 1px solid #2c4a7a; font-size: 13px; }
+/* El boton "Borrar" ya limpia: la X nativa de Chrome/Edge seria un segundo control para lo mismo. */
+.buscador input::-webkit-search-cancel-button { display: none; }
+
+/* --- Filtros nuevos ---------------------------------------------------------- */
+.campo input[type="text"] {
+  width: 100%; padding: 8px 10px; background: var(--bg);
+  border: 1px solid var(--linea); border-radius: 8px;
+}
+.campo-doble { display: flex; gap: 8px; }
+.campo-doble .campo { flex: 1; min-width: 0; margin: 10px 0; }
+.busquedas .busqueda { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 3px 6px; }
+.busquedas .linkish { font-size: 12px; font-weight: 500; }
+.guardar-busqueda { display: flex; gap: 6px; margin-top: 8px; }
+.guardar-busqueda input {
+  flex: 1; min-width: 0; padding: 6px 8px; background: var(--bg);
+  border: 1px solid var(--linea); border-radius: 7px; font-size: 12px;
+}
+.guardar-busqueda .btn { font-size: 12px; white-space: nowrap; }
+
+/* --- Alertas ---------------------------------------------------------------- */
+.alertas { position: relative; }
+.btn.campana.con-alertas { border-color: var(--media); color: var(--media); }
+.alertas-panel {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 40;
+  width: min(380px, 92vw); max-height: 70vh; overflow-y: auto;
+  background: var(--panel); border: 1px solid var(--linea); border-radius: var(--radio);
+  padding: 12px; box-shadow: 0 10px 30px #0008;
+}
+.alertas-head { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.alertas-head strong { flex: 1; }
+.alertas-lista { list-style: none; margin: 0; padding: 0; }
+.alertas-lista li {
+  display: grid; grid-template-columns: 34px 1fr; gap: 2px 8px; align-items: center;
+  padding: 7px 0; border-bottom: 1px solid var(--linea);
+}
+.alertas-lista li small { grid-column: 2; color: var(--tenue); font-size: 11px; }
+.alertas-lista li.leida { opacity: 0.6; }
+.alertas-lista .linkish, .kanban-card-head .linkish {
+  font-size: 12px;
+  /* Los titulos de SECOP son el objeto entero: tres lineas bastan para saber cual es. */
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.score-mini {
+  display: inline-block; min-width: 30px; text-align: center; font-weight: 700; font-size: 12px;
+  padding: 2px 4px; border-radius: 6px; background: var(--panel-2); color: var(--acento);
+}
+.alertas-config { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--linea); display: flex; flex-direction: column; gap: 6px; }
+.alertas-config .config-check { display: flex; flex-wrap: wrap; font-size: 12px; }
+.alertas-config input[type="number"], .perfil-form .config-check input[type="number"] {
+  width: 70px; height: auto; padding: 3px 6px; background: var(--bg);
+  border: 1px solid var(--linea); border-radius: 6px;
+}
+.alertas-config .ok { color: var(--alta); }
+
+/* --- Tablero Kanban ------------------------------------------------------- */
+.kanban {
+  display: grid; grid-template-columns: repeat(5, minmax(220px, 1fr)); gap: 12px;
+  overflow-x: auto; padding-bottom: 8px;
+}
+.kanban-col {
+  background: var(--panel); border: 1px solid var(--linea); border-top: 3px solid var(--linea);
+  border-radius: var(--radio); padding: 10px; min-height: 200px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.kanban-col.sobre { border-color: var(--acento); background: #19202b; }
+.kanban-col h3 { margin: 0 0 4px; font-size: 13px; display: flex; justify-content: space-between; }
+.kanban-col h3 .n { color: var(--tenue); font-weight: 400; }
+.col-evaluacion { border-top-color: var(--acento); }
+.col-preparacion { border-top-color: var(--media); }
+.col-presentada { border-top-color: #9b7dff; }
+.col-ganada { border-top-color: var(--alta); }
+.col-descartada { border-top-color: var(--baja); }
+.kanban-card {
+  background: var(--panel-2); border: 1px solid var(--linea); border-left: 3px solid var(--linea);
+  border-radius: 8px; padding: 8px; cursor: grab; display: flex; flex-direction: column; gap: 4px;
+}
+.kanban-card.score-alta { border-left-color: var(--alta); }
+.kanban-card.score-media { border-left-color: var(--media); }
+.kanban-card.score-baja { border-left-color: var(--baja); }
+.kanban-card-head { display: flex; gap: 6px; align-items: flex-start; }
+.kanban-card-head .linkish { font-size: 12px; line-height: 1.35; }
+.kanban-card .entidad { margin: 0; font-size: 11px; }
+.kanban-meta { margin: 0; display: flex; gap: 6px; align-items: center; font-size: 12px; }
+.kanban-card textarea {
+  width: 100%; resize: vertical; font: inherit; font-size: 12px; color: var(--texto);
+  background: var(--bg); border: 1px solid var(--linea); border-radius: 6px; padding: 5px;
+}
+.kanban-card-foot { display: flex; gap: 4px; flex-wrap: wrap; align-items: center; }
+.kanban-card-foot .btn { font-size: 11px; padding: 3px 7px; }
+.crm-select { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tenue); }
+
+/* --- Resumen del pliego ---------------------------------------------------- */
+.aviso-pliego {
+  margin: 0 0 8px; padding: 8px 10px; border-radius: 8px; font-size: 12px;
+  background: #3a331d; border: 1px solid #6b5b2b; color: #e8d9a8;
+}
+.requisitos { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 12px; }
+.requisitos-col { background: var(--panel-2); border: 1px solid var(--linea); border-radius: 8px; padding: 10px 12px; }
+.requisitos-col h4 { margin-top: 0 !important; }
+.requisitos-col ul { margin: 0; padding-left: 16px; }
+.requisitos-col li { margin-bottom: 6px; font-size: 13px; color: #cdd5e0; }
+.requisitos-col li .tag { margin-left: 6px; color: var(--tenue); font-size: 10px; }
+.req-juridico { border-top: 3px solid var(--acento); }
+.req-financiero { border-top: 3px solid var(--media); }
+.req-tecnico { border-top: 3px solid var(--alta); }
+
+/* --- Pesos del score en el perfil ------------------------------------------ */
+.pesos { border: 1px solid var(--linea); border-radius: var(--radio); padding: 10px 12px; display: flex; flex-wrap: wrap; gap: 10px; }
+.pesos legend { font-size: 12px; color: var(--tenue); padding: 0 4px; }
+.pesos label { flex: 1 1 100px; }
+.pesos input { width: 100%; }
+.pesos .perfil-nota { flex-basis: 100%; margin: 0; }
+
 @media (max-width: 900px) {
   .layout { flex-direction: column; }
   .toggle-filtros { display: block; }
   .filtros { width: 100%; position: static; max-height: none; }
   .tarjeta-foot { flex-direction: column; align-items: flex-start; }
   .contratos li { grid-template-columns: 1fr 1fr; }
+  .kanban { grid-template-columns: repeat(5, minmax(240px, 80vw)); }
+  .alertas-panel { right: auto; left: 0; }
 }
