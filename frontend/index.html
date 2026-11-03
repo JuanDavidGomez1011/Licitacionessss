@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      El panel funciona sin conexion: los datos viven en IndexedDB y la
+      descarga de SECOP es la unica cosa que usa la red. Sin este meta, el
+      navegador pone la pagina en "modo sin conexion" aunque no haga falta.
+    -->
+    <meta name="description" content="Licitaciones públicas de Colombia (SECOP II) puntuadas en tu propio navegador." />
+    <title>Oportunidades · Licitaciones SECOP II</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

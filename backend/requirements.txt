@@ -1,0 +1,19 @@
+fastapi>=0.115
+uvicorn[standard]>=0.32
+sqlalchemy>=2.0
+psycopg[binary]>=3.2
+pydantic>=2.9
+pydantic-settings>=2.6
+httpx>=0.27
+apscheduler>=3.10
+python-dotenv>=1.0
+pyyaml>=6.0
+pgserver>=0.1.4
+# Migraciones del esquema. `app/db.py` corre `alembic upgrade head` en cada
+# arranque, asi que esto no es opcional: sin el import falla la API al levantar.
+alembic>=1.14
+
+# Tests (dev). El backend no tenia ninguno y por ahi se colaron dos bugs de
+# ingesta: el tope de bind params y las claves repetidas dentro de un lote.
+pytest>=8.0
+pytest-asyncio>=0.24

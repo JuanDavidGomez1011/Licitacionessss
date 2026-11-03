@@ -1,0 +1,54 @@
+# Perfil de empresa semilla.
+# Se carga con: python scripts/bootstrap.py --perfil
+nombre: "Servicios Integrales de Tecnología S.A.S."
+descripcion: >-
+  Empresa colombiana de tecnologia y consultoria que presta servicios de
+  desarrollo de software, soporte tecnologico, infraestructura de redes y
+  ciberseguridad, analisis de datos y capacitacion, tanto a entidades del
+  estado como al sector privado. Cuenta con ISO 9001 y 27001, equipo de
+  soporte en sitio y capacidad de integracion con sistemas de informacion
+  externos.
+actividades:
+  - Desarrollo y mantenimiento de software a medida
+  - Soporte tecnologico e infraestructura de redes
+  - Ciberseguridad, auditoria y gestion de incidentes
+  - Analisis de datos, BI y automatizacion de procesos
+  - Capacitacion y transferencia tecnologica
+palabras_clave:
+  - software
+  - desarrollo de software
+  - soporte tecnologico
+  - mantenimiento de sistemas
+  - ciberseguridad
+  - seguridad de la informacion
+  - redes
+  - computacion en la nube
+  - servicio de hosting
+  - licencias de software
+  - contenedorizacion
+  - base de datos
+  - inteligencia artificial
+  - analitica
+  - capacitacion
+  - consultoria
+modalidades_preferidas:
+  - Licitacion publica
+  - Seleccion directa
+  - Concurso
+  - Subasta
+exclusiones:
+  - obra publica
+  - construccion de edificaciones
+  - interventoria de obra
+  - compra de maquinaria
+  - suministro de alimentos
+departamentos_preferidos:
+  - Bogota D.C.
+  - Bogota
+  - Antioquia
+  - Atlantico
+  - Valle del Cauca
+  - Santander
+presupuesto_minimo: 20000000
+presupuesto_maximo: 9000000000
+activo: true

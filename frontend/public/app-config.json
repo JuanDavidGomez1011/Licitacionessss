@@ -1,0 +1,7 @@
+{
+  "appToken": "",
+  "lookbackDays": 7,
+  "maxProcesos": 5000,
+  "maxContratos": 2000,
+  "includeContracts": true
+}

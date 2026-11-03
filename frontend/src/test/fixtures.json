@@ -1,0 +1,661 @@
+{
+  "id": "CO1.REQ.11094154",
+  "licitaciones": {
+    "items": [
+      {
+        "id_del_proceso": "CO1.REQ.11094154",
+        "referencia_del_proceso": "FFDS-CD-1116-2026",
+        "titulo": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL SOPORTE; ACTUALIZACIÓN; DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRE",
+        "entidad": "FONDO FINANCIERO DISTRITAL DE SALUD..",
+        "departamento": "Distrito Capital de Bogotá",
+        "ciudad": "No Definido",
+        "descripcion": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL\nSOPORTE, ACTUALIZACIÓN, DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRETARÍA DISTRITAL DE SALUD EN LA DIRECCIÓN TECNOLOGÍAS DE LA INFORMACIÓN Y LAS COMUNICACIONES-TIC.",
+        "precio_base": 35909516.0,
+        "modalidad": "Contratación directa",
+        "estado": "Seleccionado",
+        "categoria": "UNSPECIFIED",
+        "lotes": 0,
+        "fecha_publicacion": "2026-09-24T00:00:00Z",
+        "fecha_apertura_respuesta": null,
+        "dias_restantes": null,
+        "url_proceso": null,
+        "match": {
+          "score": 70,
+          "bullets": [
+            "El objeto del contrato coincide con servicios de desarrollo y soporte de software",
+            "El presupuesto esta dentro del rango de interes de la empresa",
+            "La modalidad de contratacion directa es preferida por la empresa"
+          ],
+          "rationale": "El proceso requiere servicios de desarrollo y soporte de software que encajan con la actividad principal de la empresa, con presupuesto dentro del rango objetivo y modalidad compatible. Modalidad no preferida: Contratación directa",
+          "matched_keywords": [
+            "software",
+            "desarrollo de software",
+            "soporte tecnologico",
+            "mantenimiento de sistemas"
+          ],
+          "gaps": [
+            "No se especifica si se requiere integracion con sistemas externos",
+            "No se mencionan requisitos de certificaciones adicionales",
+            "No se detalla si se necesita experiencia en salud"
+          ],
+          "semantic_similarity": 0.7464,
+          "model": "qwen3:14b",
+          "scored_at": "2026-09-26T01:58:56.245305Z"
+        },
+        "acciones": [
+          "guardar"
+        ]
+      },
+      {
+        "id_del_proceso": "CO1.REQ.11084733",
+        "referencia_del_proceso": "TMSA-CD-1599-2026",
+        "titulo": "DTTC74 CONTRATAR LA PRESTACION DE SERVICIOS PROFESIONALES Y DE APOYO A LA GESTIÓN",
+        "entidad": "TRANSMILENIO S.A.",
+        "departamento": "Distrito Capital de Bogotá",
+        "ciudad": "Bogotá",
+        "descripcion": "DTTC74 Contratar la prestación de servicios profesionales para apoyar a la Dirección Técnica Troncal, en la propuesta de mejoras y optimización de resultados en los procesos relacionados con la operación de las rutas troncales y alimentadoras del Sistema.",
+        "precio_base": 29309333.0,
+        "modalidad": "Contratación directa",
+        "estado": "Aprobado",
+        "categoria": "UNSPECIFIED",
+        "lotes": 0,
+        "fecha_publicacion": "2026-09-24T00:00:00Z",
+        "fecha_apertura_respuesta": null,
+        "dias_restantes": null,
+        "url_proceso": null,
+        "match": {
+          "score": 54,
+          "bullets": [
+            "El proceso requiere optimización de procesos operativos, encaja con la consultoria y analitica del perfil",
+            "Presupuesto dentro del rango de interes de la empresa",
+            "No menciona necesidad de desarrollo de software o ciberseguridad, actividades principales de la empresa"
+          ],
+          "rationale": "Hay coincidencias parciales en consultoria y analitica, pero el objeto del contrato no menciona tecnologia ni desarrollo de software, actividades centrales de la empresa. Modalidad no preferida: Contratación directa",
+          "matched_keywords": [
+            "optimización de resultados",
+            "procesos",
+            "analitica",
+            "consultoria"
+          ],
+          "gaps": [
+            "No se especifica necesidad de servicios de tecnologia o desarrollo de software",
+            "El enfoque operativo no coincide con la especialidad en ciberseguridad y redes de la empresa"
+          ],
+          "semantic_similarity": 0.7142,
+          "model": "qwen3:14b",
+          "scored_at": "2026-09-26T01:58:56.245305Z"
+        },
+        "acciones": []
+      },
+      {
+        "id_del_proceso": "CO1.REQ.11087502",
+        "referencia_del_proceso": "4181.010.26.1.813-2026",
+        "titulo": "CONTRATO DE PRESTACIÓN DE SERVICIOS",
+        "entidad": "SANTIAGO DE CALI DISTRITO ESPECIAL- UNIDAD ADMINISTRATIVA ESPECIAL DE GESTION DE BIENES Y SERVICIOS - CALI",
+        "departamento": "Valle del Cauca",
+        "ciudad": "Cali",
+        "descripcion": "Prestar los servicios profesionales, con el fin de brindar soporte a las actividades adelantadas en la Unidad Administrativa Especial de Gestión de Bienes y Servicios, teniendo como fuente de financiación recursos propios.",
+        "precio_base": 14157500.0,
+        "modalidad": "Contratación directa",
+        "estado": "Publicado",
+        "categoria": "UNSPECIFIED",
+        "lotes": 0,
+        "fecha_publicacion": "2026-09-24T00:00:00Z",
+        "fecha_apertura_respuesta": null,
+        "dias_restantes": null,
+        "url_proceso": null,
+        "match": {
+          "score": 30,
+          "bullets": [
+            "El proceso menciona 'soporte tecnologico' que coincide con la actividad de la empresa",
+            "El presupuesto de 14.157.500 COP esta dentro del rango de interes de la empresa",
+            "El territorio de Valle del Cauca esta en la lista de intereses de la empresa"
+          ],
+          "rationale": "El proceso encaja parcialmente en las actividades de la empresa, pero no especifica servicios de desarrollo de software o ciberseguridad que son parte clave del perfil Presupuesto 14.157.500 COP por debajo del minimo 20.000.000; Modalidad no preferida: Contratación directa",
+          "matched_keywords": [
+            "soporte tecnologico",
+            "mantenimiento de sistemas"
+          ],
+          "gaps": [
+            "El objeto del contrato no especifica servicios de desarrollo de software o ciberseguridad",
+            "No se mencionan requisitos de certificaciones ISO en el proceso"
+          ],
+          "semantic_similarity": 0.661,
+          "model": "qwen3:14b",
+          "scored_at": "2026-09-26T01:58:56.245305Z"
+        },
+        "acciones": []
+      },
+      {
+        "id_del_proceso": "CO1.REQ.11094819",
+        "referencia_del_proceso": "CPS-1421-2026",
+        "titulo": "El contratista; se obliga a prestar sus servicios como apoyo técnico;  bajo la línea de proyectos productivos del PPO de la Subcuenta de Sustitución; para brindar apoyo de  las actividades en campo y",
+        "entidad": "FONDO COLOMBIA EN PAZ",
+        "departamento": "Distrito Capital de Bogotá",
+        "ciudad": "Bogotá",
+        "descripcion": "El contratista, se obliga a prestar sus servicios como apoyo técnico, \nbajo la línea de proyectos productivos del PPO de la Subcuenta de Sustitución, para brindar apoyo de \nlas actividades en campo y administrativas necesarias para el levantamiento en campo de información \ngeográfica de los programas de sustitución voluntaria de cultivos ilícitos, conforme a las directrices \nestablecidas por el grupo de sistemas de información geográfica del nivel central y de la Regional Nariño, \nde acuerdo con",
+        "precio_base": 3832322.0,
+        "modalidad": "Contratación régimen especial",
+        "estado": "Publicado",
+        "categoria": "UNSPECIFIED",
+        "lotes": 0,
+        "fecha_publicacion": "2026-09-24T00:00:00Z",
+        "fecha_apertura_respuesta": null,
+        "dias_restantes": null,
+        "url_proceso": null,
+        "match": {
+          "score": 30,
+          "bullets": [
+            "El objeto del contrato requiere habilidades en geografía y levantamiento de información que no se mencionan en el perfil de la empresa",
+            "El presupuesto (3.832.322 COP) está por debajo del rango de interés de la empresa (20.000.000 a 9.000.000.000 COP)",
+            "No se mencionan palabras clave relacionadas con geografía, cartografía o recolección de datos en campo en el perfil de la empresa"
+          ],
+          "rationale": "El contrato requiere servicios técnicos especializados en recolección de información geográfica, un área no abordada en el perfil de la empresa. Además, el presupuesto está fuera del rango de interés declarado. Presupuesto 3.832.322 COP por debajo del minimo 20.000.000; Modalidad no preferida: Contratación régimen especial",
+          "matched_keywords": [
+            "soporte tecnologico",
+            "analisis de datos"
+          ],
+          "gaps": [
+            "No se menciona experiencia en geografía, cartografía o recolección de datos en campo",
+            "Presupuesto incompatible con el rango de interés de la empresa"
+          ],
+          "semantic_similarity": 0.6982,
+          "model": "qwen3:14b",
+          "scored_at": "2026-09-26T01:58:56.245305Z"
+        },
+        "acciones": []
+      },
+      {
+        "id_del_proceso": "CO1.REQ.11094955",
+        "referencia_del_proceso": "AI-CD-PSN-4283-2026",
+        "titulo": "PRESTACIÓN DE SERVICIOS DE APOYO A LA GESTION",
+        "entidad": "ALCALDIA  MUNICIPIO DE IBAGUE*",
+        "departamento": "Tolima",
+        "ciudad": "Ibagué",
+        "descripcion": "MOV259 - CONTRATAR LA PRESTACIÓN DE SERVICIOS DE APOYO A LOS PROCESOS DE LA SECRETARIA DE MOVILIDAD DE LA CIUDAD DE IBAGUE",
+        "precio_base": 9000000.0,
+        "modalidad": "Contratación directa",
+        "estado": "Seleccionado",
+        "categoria": "UNSPECIFIED",
+        "lotes": 0,
+        "fecha_publicacion": "2026-09-24T00:00:00Z",
+        "fecha_apertura_respuesta": null,
+        "dias_restantes": null,
+        "url_proceso": "https://community.secop.gov.co/Public/Tendering/OpportunityDetail/Index?noticeUID=CO1.NTC.10950259",
+        "match": {
+          "score": 26,
+          "bullets": [
+            "El objeto del contrato no menciona tecnologia ni servicios relacionados con el perfil de la empresa",
+            "La descripcion del proceso se enfoca en gestion administrativa y movilidad urbana, no en desarrollo de software o ciberseguridad",
+            "No hay coincidencia entre las palabras clave del perfil y el objeto del contrato"
+          ],
+          "rationale": "El proceso se centra en servicios de gestion administrativa y movilidad urbana, sin vinculo con tecnologia, desarrollo de software o ciberseguridad, areas en las que la empresa tiene experiencia certificada. Presupuesto 9.000.000 COP por debajo del minimo 20.000.000; Modalidad no preferida: Contratación directa; Territorio fuera de los preferidos: Tolima",
+          "matched_keywords": [
+            "desarrollo de software",
+            "mantenimiento de sistemas",
+            "seguridad de la informacion",
+            "computacion en la nube",
+            "servicio de hosting",
+            "licencias de software",
+            "base de datos"
+          ],
+          "gaps": [
+            "Falta mencion de servicios tecnologicos en el objeto del contrato",
+            "No se especifican requisitos tecnicos relacionados con la actividad de la empresa",
+            "El presupuesto no se alinea con las modalidades de contratacion preferidas por la empresa"
+          ],
+          "semantic_similarity": 0.6438,
+          "model": "qwen3:14b",
+          "scored_at": "2026-09-26T01:58:56.245305Z"
+        },
+        "acciones": []
+      }
+    ],
+    "total": 40,
+    "limit": 5,
+    "offset": 0,
+    "generado_en": "2026-09-26T13:13:04.611632Z"
+  },
+  "facetas": {
+    "entidades": [
+      {
+        "valor": "UNIVERSIDAD NACIONAL DE COLOMBIA",
+        "n": 4
+      },
+      {
+        "valor": "FONDO FINANCIERO DISTRITAL DE SALUD..",
+        "n": 3
+      },
+      {
+        "valor": "NARIÑO - IPS MUNICIPAL DE IPIALES E.S.E.",
+        "n": 2
+      },
+      {
+        "valor": "INSTITUTO DEPARTAMENTAL DE DEPORTES Y RECREACION DEL CAUCA",
+        "n": 2
+      },
+      {
+        "valor": "TRANSMILENIO S.A.",
+        "n": 2
+      }
+    ],
+    "departamentos": [
+      {
+        "valor": "Distrito Capital de Bogotá",
+        "n": 14
+      },
+      {
+        "valor": "No Definido",
+        "n": 6
+      },
+      {
+        "valor": "Boyacá",
+        "n": 3
+      },
+      {
+        "valor": "Santander",
+        "n": 2
+      },
+      {
+        "valor": "Risaralda",
+        "n": 2
+      }
+    ],
+    "modalidades": [
+      {
+        "valor": "Contratación directa",
+        "n": 19
+      },
+      {
+        "valor": "Contratación régimen especial",
+        "n": 19
+      },
+      {
+        "valor": "Concurso de méritos abierto",
+        "n": 1
+      },
+      {
+        "valor": "Mínima cuantía",
+        "n": 1
+      }
+    ],
+    "estados": [
+      {
+        "valor": "Publicado",
+        "n": 21
+      },
+      {
+        "valor": "Seleccionado",
+        "n": 13
+      },
+      {
+        "valor": "Aprobado",
+        "n": 2
+      },
+      {
+        "valor": "Evaluación",
+        "n": 2
+      },
+      {
+        "valor": "En aprobación",
+        "n": 2
+      }
+    ],
+    "categorias": [
+      {
+        "valor": "UNSPECIFIED",
+        "n": 40
+      }
+    ],
+    "precio_min": 1500000.0,
+    "precio_max": 318300000.0,
+    "total": 40
+  },
+  "estadisticas": {
+    "tenders": 100,
+    "contracts": 60,
+    "scored": 40,
+    "avg_score": 19.6,
+    "high_matches": 1,
+    "last_sync": null,
+    "newest_tender_at": "2026-09-24T00:00:00+00:00",
+    "generated_at": "2026-09-26T13:13:04.642027+00:00"
+  },
+  "perfil": {
+    "nombre": "Servicios Integrales de Tecnología S.A.S.",
+    "descripcion": "Empresa colombiana de tecnologia y consultoria que presta servicios de desarrollo de software, soporte tecnologico, infraestructura de redes y ciberseguridad, analisis de datos y capacitacion, tanto a entidades del estado como al sector privado. Cuenta con ISO 9001 y 27001, equipo de soporte en sitio y capacidad de integracion con sistemas de informacion externos.",
+    "actividades": [
+      "Desarrollo y mantenimiento de software a medida",
+      "Soporte tecnologico e infraestructura de redes",
+      "Ciberseguridad, auditoria y gestion de incidentes",
+      "Analisis de datos, BI y automatizacion de procesos",
+      "Capacitacion y transferencia tecnologica"
+    ],
+    "palabras_clave": [
+      "software",
+      "desarrollo de software",
+      "soporte tecnologico",
+      "mantenimiento de sistemas",
+      "ciberseguridad",
+      "seguridad de la informacion",
+      "redes",
+      "computacion en la nube",
+      "servicio de hosting",
+      "licencias de software",
+      "contenedorizacion",
+      "base de datos",
+      "inteligencia artificial",
+      "analitica",
+      "capacitacion",
+      "consultoria"
+    ],
+    "exclusiones": [
+      "obra publica",
+      "construccion de edificaciones",
+      "interventoria de obra",
+      "compra de maquinaria",
+      "suministro de alimentos"
+    ],
+    "modalidades_preferidas": [
+      "Licitacion publica",
+      "Seleccion directa",
+      "Concurso",
+      "Subasta"
+    ],
+    "departamentos_preferidos": [
+      "Bogota D.C.",
+      "Bogota",
+      "Antioquia",
+      "Atlantico",
+      "Valle del Cauca",
+      "Santander"
+    ],
+    "presupuesto_minimo": 20000000.0,
+    "presupuesto_maximo": 9000000000.0,
+    "activo": true,
+    "version": 1,
+    "embedding": true,
+    "actualizado_en": "2026-09-26T01:55:00.841771Z"
+  },
+  "detalle": {
+    "licitacion": {
+      "id_del_proceso": "CO1.REQ.11094154",
+      "referencia_del_proceso": "FFDS-CD-1116-2026",
+      "titulo": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL SOPORTE; ACTUALIZACIÓN; DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRE",
+      "entidad": "FONDO FINANCIERO DISTRITAL DE SALUD..",
+      "departamento": "Distrito Capital de Bogotá",
+      "ciudad": "No Definido",
+      "descripcion": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL\nSOPORTE, ACTUALIZACIÓN, DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRETARÍA DISTRITAL DE SALUD EN LA DIRECCIÓN TECNOLOGÍAS DE LA INFORMACIÓN Y LAS COMUNICACIONES-TIC.",
+      "precio_base": 35909516.0,
+      "modalidad": "Contratación directa",
+      "estado": "Seleccionado",
+      "categoria": "UNSPECIFIED",
+      "lotes": 0,
+      "fecha_publicacion": "2026-09-24T00:00:00Z",
+      "fecha_apertura_respuesta": null,
+      "dias_restantes": null,
+      "url_proceso": null,
+      "match": {
+        "score": 70,
+        "bullets": [
+          "El objeto del contrato coincide con servicios de desarrollo y soporte de software",
+          "El presupuesto esta dentro del rango de interes de la empresa",
+          "La modalidad de contratacion directa es preferida por la empresa"
+        ],
+        "rationale": "El proceso requiere servicios de desarrollo y soporte de software que encajan con la actividad principal de la empresa, con presupuesto dentro del rango objetivo y modalidad compatible. Modalidad no preferida: Contratación directa",
+        "matched_keywords": [
+          "software",
+          "desarrollo de software",
+          "soporte tecnologico",
+          "mantenimiento de sistemas"
+        ],
+        "gaps": [
+          "No se especifica si se requiere integracion con sistemas externos",
+          "No se mencionan requisitos de certificaciones adicionales",
+          "No se detalla si se necesita experiencia en salud"
+        ],
+        "semantic_similarity": 0.7464,
+        "model": "qwen3:14b",
+        "scored_at": "2026-09-26T01:58:56.245305Z"
+      },
+      "acciones": [
+        "guardar"
+      ]
+    },
+    "match": {
+      "score": 70,
+      "bullets": [
+        "El objeto del contrato coincide con servicios de desarrollo y soporte de software",
+        "El presupuesto esta dentro del rango de interes de la empresa",
+        "La modalidad de contratacion directa es preferida por la empresa"
+      ],
+      "rationale": "El proceso requiere servicios de desarrollo y soporte de software que encajan con la actividad principal de la empresa, con presupuesto dentro del rango objetivo y modalidad compatible. Modalidad no preferida: Contratación directa",
+      "matched_keywords": [
+        "software",
+        "desarrollo de software",
+        "soporte tecnologico",
+        "mantenimiento de sistemas"
+      ],
+      "gaps": [
+        "No se especifica si se requiere integracion con sistemas externos",
+        "No se mencionan requisitos de certificaciones adicionales",
+        "No se detalla si se necesita experiencia en salud"
+      ],
+      "semantic_similarity": 0.7464,
+      "model": "qwen3:14b",
+      "scored_at": "2026-09-26T01:58:56.245305Z"
+    },
+    "acciones": [
+      {
+        "accion": "guardar",
+        "nota": null,
+        "created_at": "2026-09-26T13:09:40.920793Z"
+      }
+    ],
+    "contratos": [],
+    "ocds": {
+      "ocid": "ocds-colombia-CO1.REQ.11094154",
+      "id": "CO1.REQ.11094154",
+      "tag": [
+        "tender"
+      ],
+      "date": "2026-09-24T00:00:00Z",
+      "title": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL SOPORTE; ACTUALIZACIÓN; DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRE",
+      "description": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL\nSOPORTE, ACTUALIZACIÓN, DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRETARÍA DISTRITAL DE SALUD EN LA DIRECCIÓN TECNOLOGÍAS DE LA INFORMACIÓN Y LAS COMUNICACIONES-TIC.",
+      "status": "active",
+      "value": {
+        "amount": 35909516.0,
+        "currency": "COP"
+      },
+      "procurementMethod": "direct",
+      "procurementMethodDetails": "Contratación directa",
+      "procurementMethodRationale": "Servicios profesionales y apoyo a la gestión",
+      "items": [
+        {
+          "description": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL SOPORTE; ACTUALIZACIÓN; DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRE",
+          "classification": {
+            "scheme": "UNSPSC",
+            "id": "UNSPECIFIED",
+            "description": "PRESTAR SERVICIOS PROFESIONALES ESPECIALIZADOS PARA EL SOPORTE; ACTUALIZACIÓN; DESARROLLO Y PUESTA EN FUNCIONAMIENTO DE NUEVAS FUNCIONALIDADES DEL SOFTWARE PARA LOS SISTEMAS DE INFORMACIÓN DE LA SECRE"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "UNSPSC",
+              "id": "No definido"
+            }
+          ]
+        }
+      ],
+      "organization": {
+        "name": "FONDO FINANCIERO DISTRITAL DE SALUD..",
+        "identifier": {
+          "scheme": "NIT",
+          "id": "8002469532"
+        },
+        "address": {
+          "locality": "No Definido",
+          "region": "Distrito Capital de Bogotá",
+          "countryName": "Colombia"
+        }
+      },
+      "tenderPeriod": {
+        "startDate": "2026-09-24T00:00:00Z",
+        "endDate": null
+      },
+      "enquiryPeriod": {
+        "startDate": "2026-09-24T00:00:00Z",
+        "endDate": null
+      },
+      "legalBasis": "Servicios profesionales y apoyo a la gestión",
+      "extensions": {
+        "referenciaDelProceso": "FFDS-CD-1116-2026",
+        "duracion": 120,
+        "unidadDuracion": "day",
+        "estadoSecop": "Seleccionado",
+        "adjudicado": "No",
+        "tipoContrato": "Prestación de servicios",
+        "subtipoContrato": "No Definido",
+        "urlProceso": null,
+        "fuente": "https://www.datos.gov.co/resource/CO1.REQ.11094154"
+      }
+    }
+  },
+  "similares": {
+    "items": [
+      {
+        "similitud": 0.7774,
+        "oportunidad": {
+          "id_del_proceso": "CO1.REQ.11087502",
+          "referencia_del_proceso": "4181.010.26.1.813-2026",
+          "titulo": "CONTRATO DE PRESTACIÓN DE SERVICIOS",
+          "entidad": "SANTIAGO DE CALI DISTRITO ESPECIAL- UNIDAD ADMINISTRATIVA ESPECIAL DE GESTION DE BIENES Y SERVICIOS - CALI",
+          "departamento": "Valle del Cauca",
+          "ciudad": "Cali",
+          "descripcion": "Prestar los servicios profesionales, con el fin de brindar soporte a las actividades adelantadas en la Unidad Administrativa Especial de Gestión de Bienes y Servicios, teniendo como fuente de financiación recursos propios.",
+          "precio_base": 14157500.0,
+          "modalidad": "Contratación directa",
+          "estado": "Publicado",
+          "categoria": "UNSPECIFIED",
+          "lotes": 0,
+          "fecha_publicacion": "2026-09-24T00:00:00Z",
+          "fecha_apertura_respuesta": null,
+          "dias_restantes": null,
+          "url_proceso": null,
+          "match": {
+            "score": 30,
+            "bullets": [
+              "El proceso menciona 'soporte tecnologico' que coincide con la actividad de la empresa",
+              "El presupuesto de 14.157.500 COP esta dentro del rango de interes de la empresa",
+              "El territorio de Valle del Cauca esta en la lista de intereses de la empresa"
+            ],
+            "rationale": "El proceso encaja parcialmente en las actividades de la empresa, pero no especifica servicios de desarrollo de software o ciberseguridad que son parte clave del perfil Presupuesto 14.157.500 COP por debajo del minimo 20.000.000; Modalidad no preferida: Contratación directa",
+            "matched_keywords": [
+              "soporte tecnologico",
+              "mantenimiento de sistemas"
+            ],
+            "gaps": [
+              "El objeto del contrato no especifica servicios de desarrollo de software o ciberseguridad",
+              "No se mencionan requisitos de certificaciones ISO en el proceso"
+            ],
+            "semantic_similarity": 0.661,
+            "model": "qwen3:14b",
+            "scored_at": "2026-09-26T01:58:56.245305Z"
+          },
+          "acciones": []
+        }
+      },
+      {
+        "similitud": 0.7698,
+        "oportunidad": {
+          "id_del_proceso": "CO1.REQ.11084733",
+          "referencia_del_proceso": "TMSA-CD-1599-2026",
+          "titulo": "DTTC74 CONTRATAR LA PRESTACION DE SERVICIOS PROFESIONALES Y DE APOYO A LA GESTIÓN",
+          "entidad": "TRANSMILENIO S.A.",
+          "departamento": "Distrito Capital de Bogotá",
+          "ciudad": "Bogotá",
+          "descripcion": "DTTC74 Contratar la prestación de servicios profesionales para apoyar a la Dirección Técnica Troncal, en la propuesta de mejoras y optimización de resultados en los procesos relacionados con la operación de las rutas troncales y alimentadoras del Sistema.",
+          "precio_base": 29309333.0,
+          "modalidad": "Contratación directa",
+          "estado": "Aprobado",
+          "categoria": "UNSPECIFIED",
+          "lotes": 0,
+          "fecha_publicacion": "2026-09-24T00:00:00Z",
+          "fecha_apertura_respuesta": null,
+          "dias_restantes": null,
+          "url_proceso": null,
+          "match": {
+            "score": 54,
+            "bullets": [
+              "El proceso requiere optimización de procesos operativos, encaja con la consultoria y analitica del perfil",
+              "Presupuesto dentro del rango de interes de la empresa",
+              "No menciona necesidad de desarrollo de software o ciberseguridad, actividades principales de la empresa"
+            ],
+            "rationale": "Hay coincidencias parciales en consultoria y analitica, pero el objeto del contrato no menciona tecnologia ni desarrollo de software, actividades centrales de la empresa. Modalidad no preferida: Contratación directa",
+            "matched_keywords": [
+              "optimización de resultados",
+              "procesos",
+              "analitica",
+              "consultoria"
+            ],
+            "gaps": [
+              "No se especifica necesidad de servicios de tecnologia o desarrollo de software",
+              "El enfoque operativo no coincide con la especialidad en ciberseguridad y redes de la empresa"
+            ],
+            "semantic_similarity": 0.7142,
+            "model": "qwen3:14b",
+            "scored_at": "2026-09-26T01:58:56.245305Z"
+          },
+          "acciones": []
+        }
+      },
+      {
+        "similitud": 0.7638,
+        "oportunidad": {
+          "id_del_proceso": "CO1.REQ.11091294",
+          "referencia_del_proceso": "IDDRC-CD-594-2026",
+          "titulo": "PRESTAR SERVICIOS COMO MONITOR NO PROFESIONAL DEL PROGRAMA DE ACTIVIDAD FISICA EN EL MARCO DEL PROYECTO FORTALECIMIENTO DE LA ACTIVIDAD FISICA RECREACION Y APROVECHAMIENTO DEL TIEMPO LIBRE PARA EL B",
+          "entidad": "INSTITUTO DEPARTAMENTAL DE DEPORTES Y RECREACION DEL CAUCA",
+          "departamento": "Cauca",
+          "ciudad": "Popayán",
+          "descripcion": "PRESTAR SERVICIOS COMO MONITOR NO PROFESIONAL DEL PROGRAMA DE ACTIVIDAD FISICA  EN EL MARCO DEL PROYECTO FORTALECIMIENTO DE LA ACTIVIDAD FISICA  RECREACION Y APROVECHAMIENTO DEL TIEMPO LIBRE PARA EL BIENESTAR INTEGRAL DE LA POBLACION DEL DEPARTAMENTO DEL CAUCA BPIN 202500000049480",
+          "precio_base": 6999995.0,
+          "modalidad": "Contratación directa",
+          "estado": "Seleccionado",
+          "categoria": "UNSPECIFIED",
+          "lotes": 0,
+          "fecha_publicacion": "2026-09-24T00:00:00Z",
+          "fecha_apertura_respuesta": null,
+          "dias_restantes": null,
+          "url_proceso": null,
+          "match": {
+            "score": 21,
+            "bullets": [
+              "El objeto del contrato no corresponde a las actividades tecnológicas de la empresa",
+              "La empresa excluye servicios de recreación y deporte en su perfil",
+              "No hay coincidencia en palabras clave relevantes para el proceso"
+            ],
+            "rationale": "El proceso requiere servicios de monitoreo deportivo, fuera del alcance tecnológico de la empresa. La descripción no menciona competencias relacionadas con deporte, recreación o capacitación física. Presupuesto 6.999.995 COP por debajo del minimo 20.000.000; Modalidad no preferida: Contratación directa",
+            "matched_keywords": [
+              "desarrollo de software",
+              "mantenimiento de sistemas",
+              "seguridad de la informacion",
+              "computacion en la nube",
+              "servicio de hosting",
+              "licencias de software",
+              "base de datos"
+            ],
+            "gaps": [
+              "Falta alineación con actividades de desarrollo de software o ciberseguridad",
+              "No se mencionan habilidades en gestión de programas deportivos",
+              "Presupuesto bajo para servicios tecnológicos"
+            ],
+            "semantic_similarity": 0.7034,
+            "model": "qwen3:14b",
+            "scored_at": "2026-09-26T01:58:56.245305Z"
+          },
+          "acciones": []
+        }
+      }
+    ]
+  }
+}
