@@ -332,6 +332,40 @@ La **carga completa** no es una suite: se midió a mano el 29/10 con el preset
 >
 > Por eso los tests son parte del trabajo, no un extra.
 
+## Publicar en Render
+
+El repo trae `render.yaml`, `package.json` en la raíz y `.node-version`
+(Node 22.12, el mínimo de Vite 8). No uses `npm run dev`: es el servidor de
+desarrollo y solo escucha en `127.0.0.1`.
+
+**Opción recomendada: Static Site con el Blueprint.** En Render: *New +* →
+*Blueprint* → este repositorio. Crea un Static Site con:
+
+| Ajuste | Valor |
+| --- | --- |
+| Root Directory | `frontend` |
+| Build Command | `npm ci && npm run build` |
+| Publish Directory | `dist` |
+
+Es gratis y no se duerme por inactividad, porque no hay servidor que dormir.
+
+**Si ya creaste un Web Service.** Si Render lo creó como **Python** (pasa
+porque en `backend/` hay código Python), el build busca un `requirements.txt` y
+falla. El lenguaje de un servicio ya creado se cambia en el panel de Render, no
+desde el repo. En *Settings*:
+
+| Ajuste | Valor |
+| --- | --- |
+| Language | **Node** |
+| Root Directory | *(vacío)* |
+| Build Command | `npm run build` |
+| Start Command | `npm start` |
+
+`npm start` sirve el build con `vite preview` en el `PORT` que da Render y
+acepta los dominios `*.onrender.com` (Vite rechaza por seguridad las cabeceras
+`Host` que no conoce). En el plan gratuito un Web Service se duerme tras 15
+minutos sin visitas; el Static Site no.
+
 ## Publicar en Vercel (o en cualquier sitio estático)
 
 Se puede, y es poco trabajo: `npm run build` deja tres ficheros en `frontend\dist`

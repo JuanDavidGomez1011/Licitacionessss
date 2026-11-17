@@ -18,6 +18,15 @@ export default defineConfig({
     // Sin proxy a /api: no hay API que proxificar. Si se deja puesto, apuntaria
     // a un backend que ya no se usa.
   },
+  // `npm start` en un hosting (Render como Web Service) sirve el build con
+  // `vite preview`. Tiene que escuchar en todas las interfaces y en el puerto que
+  // da la plataforma (`PORT`); y Vite rechaza por seguridad cualquier cabecera
+  // Host que no conozca, asi que se admiten los dominios de Render.
+  preview: {
+    host: true,
+    port: Number(process.env.PORT) || 4173,
+    allowedHosts: ['.onrender.com', ...(process.env.RENDER_EXTERNAL_HOSTNAME ? [process.env.RENDER_EXTERNAL_HOSTNAME] : [])],
+  },
   build: {
     outDir: 'dist',
     sourcemap: false,

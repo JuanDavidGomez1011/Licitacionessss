@@ -1,0 +1,17 @@
+# Despliegue en Render (Blueprint): New + > Blueprint > este repositorio.
+#
+# El panel es una pagina estatica: descarga de datos.gov.co, puntua y guarda
+# todo en el navegador. No necesita servidor ni base de datos, asi que se
+# publica como Static Site (gratis, sin dormirse por inactividad). El backend
+# de Python de `backend/` es opcional y no se despliega.
+services:
+  - type: web
+    runtime: static
+    name: licitaciones
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      # Vite 8 pide Node 20.19+ o 22.12+.
+      - key: NODE_VERSION
+        value: 22.12.0
