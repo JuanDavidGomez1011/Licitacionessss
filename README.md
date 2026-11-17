@@ -167,9 +167,30 @@ cinco componentes, cada uno de 0 a 100:
 
 Los pesos se editan en **Perfil** y se normalizan. Un componente sin datos
 (perfil sin UNSPSC, proceso sin precio o sin fecha de cierre) **no cuenta como
-0**: su peso se reparte entre los demás. Los códigos UNSPSC del perfil van en
-**Perfil** (por defecto 4323 software, 8111 servicios informáticos y 8116
-entrega de servicios de TI).
+0**: su peso se reparte entre los demás.
+
+### Perfil por defecto: Investigación, Diseño e Innovación
+
+La página viene enfocada en investigación aplicada, diseño e innovación (CTeI,
+estudios y diagnósticos, diseño de servicios, de producto y gráfico, laboratorios
+de innovación, innovación social, transferencia de conocimiento). Todo se edita
+en **Perfil**:
+
+- **UNSPSC**: 8010 asesoría y gestión, 8014 investigación de mercados, 8016
+  administración de empresas, 8110 ingeniería y diseño, 8214 diseño gráfico,
+  9314 desarrollo comunitario y social. Salieron de mirar qué códigos usan de
+  verdad los procesos de investigación, diseño e innovación en SECOP II
+  (2025-2026). Queda fuera **8011** (prestación de servicios / recursos
+  humanos) aunque es el más usado: daría 100 a cualquier contrato de prestación
+  de servicios. Añádelo si te interesan esos contratos.
+- **Modalidades preferidas**: concurso de méritos (la de la consultoría),
+  contratación directa y régimen especial (habituales en CTeI), licitación,
+  selección abreviada y mínima cuantía.
+- **Presupuesto**: de 10 a 5.000 millones.
+
+Si en un navegador ya se había guardado otro perfil, ese manda sobre el de
+fábrica: **Perfil → Restablecer perfil por defecto → Guardar perfil →
+Repuntuar todo**.
 
 El orden de las operaciones es el importante:
 

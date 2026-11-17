@@ -12,52 +12,73 @@ import { listaDeTerminos } from './texto'
 import type { Perfil } from './tipos'
 
 export const PERFIL_POR_DEFECTO: Perfil = {
-  version: 1,
-  nombre: 'Servicios Integrales de Tecnología S.A.S.',
+  version: 2,
+  nombre: 'Investigación, Diseño e Innovación',
   descripcion:
-    'Empresa colombiana de tecnologia y consultoria que presta servicios de desarrollo de software, ' +
-    'soporte tecnologico, infraestructura de redes y ciberseguridad, analisis de datos y ' +
-    'capacitacion, tanto a entidades del estado como al sector privado. Cuenta con ISO 9001 y 27001, ' +
-    'equipo de soporte en sitio y capacidad de integracion con sistemas de informacion externos.',
+    'Organización colombiana dedicada a la investigación aplicada, el diseño y la innovación. Formula y ' +
+    'ejecuta proyectos de ciencia, tecnología e innovación; realiza estudios, diagnósticos y ' +
+    'caracterizaciones; diseña servicios, productos, procesos y piezas gráficas; acompaña laboratorios de ' +
+    'innovación y procesos de innovación social, y transfiere conocimiento a entidades públicas, ' +
+    'universidades, comunidades y empresas.',
   actividades: [
-    'Desarrollo y mantenimiento de software a medida',
-    'Soporte tecnologico e infraestructura de redes',
-    'Ciberseguridad, auditoria y gestion de incidentes',
-    'Analisis de datos, BI y automatizacion de procesos',
-    'Capacitacion y transferencia tecnologica',
+    'Investigación aplicada, estudios técnicos, diagnósticos y caracterizaciones',
+    'Formulación y ejecución de proyectos de ciencia, tecnología e innovación',
+    'Diseño de servicios, de producto y diseño gráfico',
+    'Laboratorios de innovación, innovación social y co-creación con comunidades',
+    'Transferencia y apropiación social del conocimiento',
   ],
   palabras_clave: [
-    'software',
-    'desarrollo de software',
-    'soporte tecnologico',
-    'mantenimiento de sistemas',
-    'ciberseguridad',
-    'seguridad de la informacion',
-    'redes',
-    'computacion en la nube',
-    'servicio de hosting',
-    'licencias de software',
-    'contenedorizacion',
-    'base de datos',
-    'inteligencia artificial',
-    'analitica',
-    'capacitacion',
-    'consultoria',
+    'investigación',
+    'investigación aplicada',
+    'estudios técnicos',
+    'diagnóstico',
+    'caracterización',
+    'diseño',
+    'diseño de servicios',
+    'diseño de producto',
+    'diseño gráfico',
+    'innovación',
+    'innovación social',
+    'ciencia, tecnología e innovación',
+    'laboratorio de innovación',
+    'prototipo',
+    'transferencia de conocimiento',
+    'apropiación social del conocimiento',
+    'formulación de proyectos',
+    'consultoría',
   ],
-  // Familias UNSPSC: 4323 software, 8111 servicios informaticos, 8116 entrega
-  // de servicios de TI. Se puede afinar a clase (6) o producto (8 digitos).
-  codigos_unspsc: ['4323', '8111', '8116'],
-  modalidades_preferidas: ['Licitacion publica', 'Seleccion directa', 'Concurso', 'Subasta'],
+  // Familias UNSPSC que usan de verdad los procesos de investigacion, diseno e
+  // innovacion en SECOP II (consulta a p6dx-8zbt de 2025-2026, 17/11/2026):
+  // 8010 asesoria y gestion, 8014 investigacion de mercados, 8016 administracion
+  // de empresas, 8110 ingenieria y diseno, 9314 desarrollo comunitario y social,
+  // mas 8214 diseno grafico. Queda fuera 8011 (recursos humanos / prestacion de
+  // servicios) aunque es el mas usado: es tan generico que daria 100 a cualquier
+  // contrato de prestacion de servicios. Se puede anadir desde el panel.
+  codigos_unspsc: ['8010', '8014', '8016', '8110', '8214', '9314'],
+  // Concurso de meritos es la modalidad de la consultoria (estudios, disenos,
+  // investigacion); los contratos de CTeI suelen ir por contratacion directa o
+  // por regimen especial (universidades, Minciencias).
+  modalidades_preferidas: [
+    'Concurso de meritos',
+    'Contratacion directa',
+    'Regimen especial',
+    'Licitacion publica',
+    'Seleccion abreviada',
+    'Minima cuantia',
+  ],
   exclusiones: [
     'obra publica',
     'construccion de edificaciones',
     'interventoria de obra',
     'compra de maquinaria',
     'suministro de alimentos',
+    'combustible',
+    'vigilancia y seguridad',
+    'aseo y cafeteria',
   ],
   departamentos_preferidos: ['Bogota D.C.', 'Bogota', 'Antioquia', 'Atlantico', 'Valle del Cauca', 'Santander'],
-  presupuesto_minimo: 20000000,
-  presupuesto_maximo: 9000000000,
+  presupuesto_minimo: 10000000,
+  presupuesto_maximo: 5000000000,
   activo: true,
   actualizado_en: null,
 }

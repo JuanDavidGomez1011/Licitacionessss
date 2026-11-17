@@ -95,7 +95,7 @@ export default function PanelFiltros({
               type="text"
               aria-label="Nombre de la búsqueda"
               value={nombreBusqueda}
-              placeholder="Nombre (p. ej. Software Bogotá)"
+              placeholder="Nombre (p. ej. Innovación Bogotá)"
               onChange={(e) => setNombreBusqueda(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && void guardar()}
             />
@@ -114,7 +114,7 @@ export default function PanelFiltros({
         <input
           type="text"
           value={filtros.incluir}
-          placeholder="aplicativo, licencias, nube"
+          placeholder="investigación, diseño, prototipo"
           onChange={(e) => set({ incluir: e.target.value })}
         />
       </label>

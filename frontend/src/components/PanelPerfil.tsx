@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
 import { PESOS_POR_DEFECTO } from '../lib/config'
+import { PERFIL_POR_DEFECTO } from '../lib/perfil'
 import type { Perfil, PesosScore } from '../lib/tipos'
 import { NOMBRES_COMPONENTES } from './Tarjeta'
 
@@ -25,7 +26,8 @@ const CAMPOS_LISTA: { clave: CampoLista; etiqueta: string; ayuda: string }[] = [
   {
     clave: 'codigos_unspsc',
     etiqueta: 'Códigos UNSPSC',
-    ayuda: 'Segmento (2 dígitos), familia (4), clase (6) o producto (8). Ej.: 4323 software, 8111 servicios informáticos.',
+    ayuda:
+      'Segmento (2 dígitos), familia (4), clase (6) o producto (8). Ej.: 8010 asesoría y gestión, 8110 ingeniería y diseño, 8214 diseño gráfico.',
   },
   { clave: 'actividades', etiqueta: 'Actividades', ayuda: 'A qué se dedica la empresa, en frases.' },
   { clave: 'modalidades_preferidas', etiqueta: 'Modalidades preferidas', ayuda: 'Las que no estén aquí pierden 15 puntos.' },
@@ -35,6 +37,17 @@ const CAMPOS_LISTA: { clave: CampoLista; etiqueta: string; ayuda: string }[] = [
 
 function listaATexto(lista: string[] | undefined): string {
   return (lista || []).join(', ')
+}
+
+/** El formulario relleno con un perfil. */
+function borradorDe(perfil: Perfil): Borrador {
+  return {
+    nombre: perfil.nombre,
+    descripcion: perfil.descripcion,
+    presupuesto_minimo: perfil.presupuesto_minimo,
+    presupuesto_maximo: perfil.presupuesto_maximo,
+    listas: Object.fromEntries(CAMPOS_LISTA.map((c) => [c.clave, listaATexto(perfil[c.clave])])) as Record<CampoLista, string>,
+  }
 }
 
 interface Borrador {
@@ -54,13 +67,7 @@ export default function PanelPerfil({
   onGuardado?: (p: Perfil) => void | Promise<void>
   onCerrar: () => void
 }) {
-  const [borrador, setBorrador] = useState<Borrador>(() => ({
-    nombre: perfil.nombre,
-    descripcion: perfil.descripcion,
-    presupuesto_minimo: perfil.presupuesto_minimo,
-    presupuesto_maximo: perfil.presupuesto_maximo,
-    listas: Object.fromEntries(CAMPOS_LISTA.map((c) => [c.clave, listaATexto(perfil[c.clave])])) as Record<CampoLista, string>,
-  }))
+  const [borrador, setBorrador] = useState<Borrador>(() => borradorDe(perfil))
   const [pesos, setPesos] = useState<PesosScore>({ ...PESOS_POR_DEFECTO })
   const [guardando, setGuardando] = useState(false)
   const [repuntuando, setRepuntuando] = useState(false)
@@ -123,6 +130,15 @@ export default function PanelPerfil({
     }
   }
 
+  // Solo rellena el formulario: no guarda. Lo guardado en este navegador manda
+  // sobre el perfil por defecto, asi que es la forma de volver a el sin borrar
+  // los datos; el usuario lo revisa y pulsa Guardar.
+  const restablecer = () => {
+    setBorrador(borradorDe(PERFIL_POR_DEFECTO))
+    setError(null)
+    setMensaje('Formulario con el perfil por defecto (Investigación, Diseño e Innovación). Pulsa Guardar perfil para aplicarlo.')
+  }
+
   const sumaPesos = Object.values(pesos).reduce((a, b) => a + (Number(b) || 0), 0)
 
   return (
@@ -150,7 +166,7 @@ export default function PanelPerfil({
               rows={4}
               value={borrador.descripcion || ''}
               onChange={(e) => cambiar('descripcion', e.target.value)}
-              placeholder="Qué hace la empresa, con qué tecnología y para quién."
+              placeholder="Qué hace la organización, en qué temas y para quién."
             />
           </label>
 
@@ -225,6 +241,14 @@ export default function PanelPerfil({
             title="Vuelve a puntuar todo lo ya descargado con este perfil"
           >
             {repuntuando ? 'Repuntuando…' : 'Repuntuar todo'}
+          </button>
+          <button
+            type="button"
+            className="btn fantasma"
+            onClick={restablecer}
+            title="Rellena el formulario con el perfil por defecto; no guarda hasta que pulses Guardar perfil"
+          >
+            Restablecer perfil por defecto
           </button>
           <button type="button" className="btn fantasma" onClick={onCerrar}>
             Cerrar

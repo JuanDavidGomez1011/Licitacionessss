@@ -32,7 +32,7 @@ import { deduplicar, mapearProceso, mapearProcesoSecopI, ligeroProceso } from '.
 import { noticeUid, isoDia, soqlDate, soqlQuote, socrataDate, socrataUrl, SocrataClient } from '../lib/socrata'
 import { CAP_BUDGET, CAP_EXCLUSION, aplicar, evaluate } from '../lib/reglas'
 import { resumirPliego } from '../lib/resumidor'
-import { norm, textoFicha, tokenize } from '../lib/texto'
+import { keywordOverlap, norm, textoFicha, tokenize } from '../lib/texto'
 import {
   construirIndiceCorpus,
   cosenoContraDoc,
@@ -217,13 +217,68 @@ describe('reglas', () => {
   })
 })
 
-describe('score', () => {
-  const perfil = normalizarPerfil({
-    ...PERFIL_POR_DEFECTO,
-    exclusiones: [],
-    presupuesto_minimo: null,
-    presupuesto_maximo: null,
+/**
+ * Perfil de prueba para el motor, explicito y aparte del perfil por defecto:
+ * los fixtures son procesos de software, y estos tests miden el motor, no el
+ * enfoque que traiga la pagina de fabrica.
+ */
+const PERFIL_SOFTWARE = normalizarPerfil({
+  nombre: 'Empresa de software de prueba',
+  descripcion: 'Desarrollo de software, soporte tecnologico y capacitacion con sistemas de informacion externos.',
+  actividades: ['Desarrollo y mantenimiento de software a medida'],
+  palabras_clave: ['software', 'desarrollo de software', 'soporte tecnologico', 'capacitacion'],
+  codigos_unspsc: ['4323'],
+})
+
+describe('perfil por defecto: investigacion, diseno e innovacion', () => {
+  it('puntua un proceso de investigacion e innovacion por encima de uno de software', () => {
+    const perfil = normalizarPerfil(PERFIL_POR_DEFECTO)
+    expect(perfil.codigos_unspsc).toEqual(['8010', '8014', '8016', '8110', '8214', '9314'])
+    expect(perfil.palabras_clave.join(' ')).not.toMatch(/software/)
+
+    const procesos = [
+      PROCESO({
+        id_del_proceso: 'INV',
+        nombre_del_procedimiento: 'INVESTIGACION APLICADA Y LABORATORIO DE INNOVACION SOCIAL',
+        descripcion: 'Diseño de servicios, prototipo y transferencia de conocimiento en ciencia, tecnología e innovación.',
+        codigo_principal_categoria: 'V1.80101500',
+        modalidad_de_contratacion: 'Concurso de méritos abierto',
+        precio_base: 300000000,
+      }),
+      PROCESO({ id_del_proceso: 'SW', codigo_principal_categoria: 'V1.43232107' }),
+    ]
+    const indice = construirIndiceCorpus(procesos)
+    const vector = vectorizarPerfil(perfil, indice.idf)
+    const [inv, sw] = procesos.map((proceso, i) =>
+      puntuarProceso({
+        proceso,
+        ficha: { id: proceso.id_del_proceso, text: textoFicha(proceso), precio: proceso.precio_base, modalidad: proceso.modalidad_de_contratacion, departamento: proceso.departamento_entidad },
+        vector,
+        indice,
+        indicePos: i,
+        perfil,
+        ahora: Date.UTC(2026, 8, 1),
+      }),
+    )
+    expect(inv!.componentes!.unspsc).toBe(100)
+    expect(inv!.componentes!.palabras).toBe(100)
+    expect(sw!.componentes!.unspsc).toBe(0)
+    expect(inv!.score).toBeGreaterThanOrEqual(70)
+    expect(inv!.score).toBeGreaterThan(sw!.score + 30)
   })
+
+  it('una palabra clave de varias palabras pide todas las que tienen significado', () => {
+    // Antes bastaba una cualquiera, incluido "de": "diseño de producto"
+    // coincidia con cualquier texto que dijera "de".
+    expect(keywordOverlap('compra de papeleria', ['diseño de producto'])).toEqual([])
+    expect(keywordOverlap('el diseño del nuevo producto', ['diseño de producto'])).toEqual(['diseño de producto'])
+    expect(keywordOverlap('ciencia, tecnología e innovación', ['ciencia, tecnología e innovación'])).toHaveLength(1)
+    expect(keywordOverlap('innovación abierta', ['ciencia, tecnología e innovación'])).toEqual([])
+  })
+})
+
+describe('score', () => {
+  const perfil = normalizarPerfil({ ...PERFIL_SOFTWARE, exclusiones: [], presupuesto_minimo: null, presupuesto_maximo: null })
 
   it('el corpus se indexa y la similitud del propio documento es la maxima', () => {
     const procesos = [
@@ -298,7 +353,8 @@ describe('score', () => {
     expect(digitosUnspsc('V1.43232107')).toBe('43232107')
     expect(digitosUnspsc('UNSPECIFIED')).toBe('')
     const proceso = { codigo_principal_categoria: 'V1.43232107', categorias_adicionales: null }
-    expect(puntajeUnspsc(['4323'], proceso).valor).toBe(100)
+    expect(puntajeUnspsc(['4323'], proceso)).toEqual({ valor: 100, detalle: 'UNSPSC 43232107 dentro de 4323' })
+    expect(puntajeUnspsc(['43232200'], proceso).detalle).toBe('UNSPSC 43232107 misma familia que 43232200')
     expect(puntajeUnspsc(['432321'], proceso).valor).toBe(100)
     expect(puntajeUnspsc(['43232200'], proceso).valor).toBe(60) // misma familia (4323), otra clase
     expect(puntajeUnspsc(['43210000'], proceso).valor).toBe(30) // mismo segmento (43)

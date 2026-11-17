@@ -248,13 +248,13 @@ export function puntajeUnspsc(codigosPerfil: string[], proceso: Pick<Proceso, 'c
         como = `dentro de ${cf}`
       } else {
         const comun = prefijoComun(cp, cf)
-        if (comun >= 6) [valor, como] = [80, 'misma clase']
-        else if (comun >= 4) [valor, como] = [60, 'misma familia']
-        else if (comun >= 2) [valor, como] = [30, 'mismo segmento']
+        if (comun >= 6) [valor, como] = [80, `misma clase que ${cf}`]
+        else if (comun >= 4) [valor, como] = [60, `misma familia que ${cf}`]
+        else if (comun >= 2) [valor, como] = [30, `mismo segmento que ${cf}`]
       }
       if (valor > mejor) {
         mejor = valor
-        detalle = `UNSPSC ${cp} ${como} que ${cf}`
+        detalle = `UNSPSC ${cp} ${como}`
       }
     }
   }

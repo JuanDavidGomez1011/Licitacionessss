@@ -68,13 +68,21 @@ export function hit(termino: string, texto: string): boolean {
   return true
 }
 
-/** Palabras clave del perfil que aparecen literalmente en el texto. */
+/**
+ * Palabras clave del perfil que aparecen en el texto.
+ *
+ * Una palabra clave de varias palabras cuenta si estan TODAS sus palabras con
+ * significado (sin palabras vacias ni de menos de 3 letras). Antes bastaba con
+ * una cualquiera, incluida "de": "diseño de producto" o "desarrollo de software"
+ * coincidian con casi cualquier proceso y el componente salia inflado.
+ */
 export function keywordOverlap(texto: string, keywords: string[] | null | undefined): string[] {
   if (!texto) return []
   const conjunto = new Set(tokenize(texto))
   return (keywords || []).filter((k) => {
     if (!k) return false
-    return tokenize(k).some((p) => conjunto.has(p))
+    const significativas = tokenize(k).filter((p) => p.length >= 3 && !STOPWORDS.has(p))
+    return significativas.length > 0 && significativas.every((p) => conjunto.has(p))
   })
 }
 
