@@ -1,0 +1,6 @@
+# Vacio a proposito: el panel no usa Python.
+#
+# Existe para los hostings que tratan el repo como Python (Render lo hace por la
+# carpeta backend/) y ejecutan `pip install -r requirements.txt` en el build:
+# sin este fichero el build falla antes de llegar a Node. Las dependencias del
+# backend opcional estan en backend/requirements.txt.

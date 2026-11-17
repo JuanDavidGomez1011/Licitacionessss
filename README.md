@@ -349,10 +349,21 @@ desarrollo y solo escucha en `127.0.0.1`.
 
 Es gratis y no se duerme por inactividad, porque no hay servidor que dormir.
 
-**Si ya creaste un Web Service.** Si Render lo creó como **Python** (pasa
-porque en `backend/` hay código Python), el build busca un `requirements.txt` y
-falla. El lenguaje de un servicio ya creado se cambia en el panel de Render, no
-desde el repo. En *Settings*:
+**Si ya creaste un Web Service como Python** (Render lo detecta así por la
+carpeta `backend/`), funciona sin tocar nada, con Build Command `pip install -r
+requirements.txt` y Start Command `npm run dev`:
+
+- `requirements.txt` de la raíz está vacío a propósito: el paso de `pip` pasa
+  sin instalar nada.
+- El entorno Python de Render también trae Node (lee `.node-version`), y
+  `npm run dev` **de la raíz** no es el modo desarrollo: instala, construye y
+  sirve la versión de producción en el `PORT` de Render. Tarda ~1 minuto en
+  arrancar porque construye en cada arranque.
+
+En local, el modo desarrollo sigue siendo `.\start.ps1` o `npm run dev` dentro
+de `frontend/`.
+
+**Más limpio: cambiar el servicio a Node.** En *Settings*:
 
 | Ajuste | Valor |
 | --- | --- |

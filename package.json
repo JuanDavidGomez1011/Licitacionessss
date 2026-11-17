@@ -1,10 +1,11 @@
 {
   "name": "licitaciones",
   "private": true,
-  "description": "Raiz del repo: delega en frontend/. Existe para que un hosting (Render) detecte Node y no Python, y para poder construir y servir el panel desde la raiz.",
+  "description": "Raiz del repo: delega en frontend/. Existe para que un hosting (Render) pueda construir y servir el panel desde la raiz.",
   "scripts": {
     "build": "npm ci --prefix frontend && npm run build --prefix frontend",
-    "start": "npm run start --prefix frontend"
+    "start": "npm run start --prefix frontend",
+    "dev": "npm run build && npm run start"
   },
   "engines": {
     "node": ">=22.12.0"
